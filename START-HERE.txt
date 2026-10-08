@@ -1,0 +1,90 @@
+IRELAND: THEN & NOW — the plain HTML version
+============================================
+
+This folder is a complete, ready-to-publish website. No build tools, no npm, no
+framework: just .html files, one stylesheet, and two folders of images.
+
+One small script comes with it - scroll-spy.js - which slides the green dot in
+the "in this section" rail down the side of the long-form pages to the section
+you are reading. Only those ten pages load it; the other 81 are plain HTML.
+
+There are 91 pages, in two languages — 46 in English and 45 in Russian. Every
+English page has a Russian twin, and the EN | RU switch in the header takes you
+to the same page in the other language, wherever you are.
+
+
+WHERE TO START
+--------------
+
+Open  index.html  in any browser. That is the front page.
+
+From there:
+
+  index.html ......... the front page
+  explore.html ....... all 30 places, in one list
+  history.html ....... history
+  culture.html ....... culture
+  geography.html ..... geography, climate and wildlife
+  today.html ......... Ireland today
+  plan.html .......... planning a trip
+  credits.html ....... every photograph and its licence
+  case-study.html .... how this site was rebuilt from the 2005 original
+  sitemap.html ....... every page of the site on one page
+  2005.html .......... the 2005 website's own contents page
+  original.html ...... the 2005 site, introduced
+
+Russian pages have the same names with  ru-  in front: ru-index.html,
+ru-explore.html, ru-2005.html, and so on. The switch in the header moves you
+between the two, and it always lands on the same page — never on the homepage,
+and never on the language you are already reading.
+
+The place pages are named  place-<name>.html  and their Russian twins
+ru-place-<name>.html. There are 30 of them.
+
+
+THE 2005 SITE IS STILL HERE
+---------------------------
+
+It is untouched, exactly as it was, in the  archive/  folder. The entry point
+is  archive/index.htm  — note the .htm ending, because that is how it was
+written in 2005. 2005.html is a contents page for all 168 of its pages in both
+languages.
+
+Nothing in that folder was modernised, repaired, renamed or deleted.
+
+
+TWO FILES FOR SEARCH ENGINES
+----------------------------
+
+  sitemap.xml ....... every page, for Google and Bing
+  robots.txt ........ tells them where the sitemap is
+
+Both point at  https://anna032888.github.io/ireland-then-and-now/  — if the
+site ever moves, those are the two files to edit.
+
+
+HOW TO PUT IT ONLINE
+--------------------
+
+GitHub Pages, in four steps:
+
+  1. Open the repository on GitHub and click  Add file  ->  Upload files.
+  2. Drag everything INSIDE this folder into the upload box — including the
+     img  and  archive  folders and the hidden  .nojekyll  file. Do not upload
+     the folder itself; upload its contents.
+  3. Commit the changes.
+  4. In the repository: Settings -> Pages. Under Source choose
+     "Deploy from a branch", pick the  main  branch and the  / (root)  folder,
+     then Save.
+
+Wait a minute or two. The site will be at
+  https://<your-username>.github.io/<repository-name>/
+
+
+NOTE
+----
+
+This folder is a copy. The site is authored in
+/home/user/ireland-then-and-now (React, Vite, TypeScript), and this folder is
+generated from it by  bun run export  inside packages/web. Editing the .html
+files here by hand works, but the next export overwrites them.

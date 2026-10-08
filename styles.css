@@ -1,0 +1,2393 @@
+/* ==========================================================================
+   Ireland: Then & Now — site stylesheet
+   Shared verbatim by the React app and the static export (see
+   scripts/export-static.ts). Keep it self-contained: no Tailwind, no imports.
+   ========================================================================== */
+
+:root {
+  --ie-navy: #0a2544;
+  --ie-navy-deep: #061f42;
+  --ie-green: #17804d;
+  --ie-green-dark: #0f6b3e;
+  --ie-gold: #b08d3f;
+  --ie-gold-soft: #cfae6b;
+  --ie-cream: #f3eee2;
+  --ie-paper: #fbf8f0;
+  --ie-sage: #dee1de;
+  --ie-ink: #1f2933;
+  --ie-muted: #5c6672;
+  --ie-line: #dcd5c4;
+  --ie-shadow: 0 18px 40px -24px rgba(6, 31, 66, 0.45);
+  --ie-serif: "Cormorant Garamond", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  --ie-sans: "Lato", "Segoe UI", system-ui, -apple-system, sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--ie-paper);
+  color: var(--ie-ink);
+  font-family: var(--ie-sans);
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.75;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: var(--ie-green);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--ie-green-dark);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--ie-serif);
+  font-weight: 600;
+  color: var(--ie-navy);
+  letter-spacing: -0.01em;
+  margin: 0;
+  line-height: 1.1;
+}
+
+p {
+  margin: 0 0 1.15em;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+button {
+  font: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--ie-gold);
+  outline-offset: 3px;
+}
+
+.shell {
+  width: 100%;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 clamp(18px, 4vw, 44px);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* ---------- ornaments ------------------------------------------------- */
+
+.ornament {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  margin: 16px 0 22px;
+  color: var(--ie-gold);
+}
+
+.ornament--center {
+  justify-content: center;
+}
+
+.ornament__rule {
+  height: 1px;
+  width: clamp(40px, 9vw, 90px);
+  background: linear-gradient(90deg, transparent, var(--ie-gold-soft));
+}
+
+.ornament__rule:last-child {
+  background: linear-gradient(270deg, transparent, var(--ie-gold-soft));
+}
+
+.ornament__mark {
+  width: 13px;
+  height: 13px;
+  transform: rotate(45deg);
+  border: 1px solid var(--ie-gold);
+  display: block;
+}
+
+.eyebrow {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ie-gold);
+  margin: 0 0 14px;
+}
+
+/* ---------- header ---------------------------------------------------- */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: rgba(251, 248, 240, 0.94);
+  backdrop-filter: saturate(140%) blur(6px);
+  border-bottom: 1px solid var(--ie-line);
+}
+
+.site-header__inner {
+  display: flex;
+  align-items: center;
+  gap: clamp(14px, 3vw, 40px);
+  min-height: 74px;
+}
+
+/*
+ * The homepage floats the bar as a rounded cream pill over the hero. The header
+ * itself is then only a transparent 88px slot — 12 + 64 + 12 — and the pill is
+ * the shell inside it, so `.hero--home` can be pulled up by exactly that height
+ * and the photograph runs to the top of the page and behind the pill. Below
+ * 760px the menu wraps onto two rows and the pull-up is switched off, in the
+ * header's own media query further down this file.
+ */
+.site-header--overlay {
+  padding: 12px clamp(14px, 2.2vw, 26px);
+  background: transparent;
+  border-bottom: 0;
+}
+
+.site-header--overlay .site-header__inner {
+  min-height: 64px;
+  padding-left: clamp(16px, 2vw, 26px);
+  padding-right: clamp(16px, 2vw, 26px);
+  background: rgba(251, 248, 240, 0.94);
+  backdrop-filter: saturate(140%) blur(10px);
+  border-radius: 16px;
+  box-shadow: 0 20px 44px -26px rgba(6, 31, 66, 0.55);
+}
+
+.wordmark {
+  display: inline-flex;
+  align-items: center;
+  gap: 11px;
+  color: var(--ie-navy);
+  flex: 0 0 auto;
+}
+
+.wordmark:hover {
+  color: var(--ie-navy);
+}
+
+.wordmark__knot {
+  width: 30px;
+  height: 30px;
+  color: var(--ie-gold);
+  flex: 0 0 auto;
+}
+
+.wordmark__text {
+  font-family: var(--ie-serif);
+  font-size: 1.6rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  line-height: 1;
+}
+
+.site-nav {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: clamp(12px, 2vw, 26px);
+  margin-left: auto;
+  font-size: 0.98rem;
+  font-weight: 400;
+}
+
+.site-nav__link {
+  color: var(--ie-navy);
+  position: relative;
+  padding: 4px 0;
+  white-space: nowrap;
+  flex: 0 0 auto;
+}
+
+.site-nav__link::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -3px;
+  width: 4px;
+  height: 4px;
+  transform: translateX(-50%) rotate(45deg) scale(0);
+  background: var(--ie-gold);
+  transition: transform 0.2s ease;
+}
+
+.site-nav__link:hover::after,
+.site-nav__link[aria-current="page"]::after {
+  transform: translateX(-50%) rotate(45deg) scale(1);
+}
+
+.site-nav__link[aria-current="page"] {
+  color: var(--ie-green);
+  font-weight: 700;
+}
+
+.lang-switch {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  color: var(--ie-muted);
+  flex: 0 0 auto;
+}
+
+.lang-switch a {
+  color: var(--ie-muted);
+  font-weight: 700;
+}
+
+.lang-switch a[aria-current="true"] {
+  color: var(--ie-green);
+}
+
+.lang-switch__sep {
+  color: var(--ie-line);
+}
+
+/* ---------- buttons --------------------------------------------------- */
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0.72rem 1.5rem;
+  border-radius: 5px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  border: 1px solid transparent;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.button--primary {
+  background: var(--ie-green);
+  color: #fff;
+  box-shadow: 0 10px 24px -14px rgba(15, 107, 62, 0.9);
+}
+
+.button--primary:hover {
+  background: var(--ie-green-dark);
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+.button--outline {
+  border-color: var(--ie-line);
+  color: var(--ie-navy);
+  background: #fffdf8;
+}
+
+.button--outline:hover {
+  border-color: var(--ie-gold);
+  color: var(--ie-navy);
+}
+
+/* The second action on the homepage hero: a paper-coloured button, so the pair
+   reads as one green and one quiet, rather than two competing fills. */
+.button--paper {
+  background: rgba(251, 248, 240, 0.92);
+  color: var(--ie-navy);
+}
+
+.button--paper:hover {
+  background: #fff;
+  color: var(--ie-navy);
+  transform: translateY(-1px);
+}
+
+/* ---------- hero ------------------------------------------------------ */
+
+.hero {
+  position: relative;
+  min-height: min(86vh, 720px);
+  display: flex;
+  align-items: center;
+  background-color: var(--ie-navy);
+  background-size: cover;
+  background-position: center;
+  isolation: isolate;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    100deg,
+    rgba(6, 31, 66, 0.86) 0%,
+    rgba(6, 31, 66, 0.66) 38%,
+    rgba(6, 31, 66, 0.2) 68%,
+    rgba(6, 31, 66, 0.05) 100%
+  );
+  z-index: -1;
+}
+
+.hero__content {
+  position: relative;
+  max-width: 640px;
+  padding: clamp(70px, 11vh, 120px) 0;
+  color: #fff;
+}
+
+.hero__title {
+  color: #fff;
+  font-size: clamp(2.9rem, 7vw, 5.6rem);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  text-shadow: 0 1px 30px rgba(6, 31, 66, 0.45);
+}
+
+.hero__lead {
+  max-width: 470px;
+  margin: 0 0 30px;
+  font-size: 1.12rem;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.93);
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.hero .ornament {
+  color: var(--ie-gold-soft);
+}
+
+.hero .ornament__rule {
+  background: linear-gradient(90deg, transparent, var(--ie-gold-soft));
+}
+
+.hero--page {
+  min-height: min(52vh, 440px);
+}
+
+.hero--page .hero__content {
+  padding: clamp(56px, 8vh, 88px) 0;
+}
+
+.hero--page .hero__title {
+  font-size: clamp(2.4rem, 5.4vw, 4.2rem);
+}
+
+/*
+ * The homepage hero. Shorter than an inner page's, because the cream panel of
+ * cards is pulled up over its bottom edge and takes the last slice of it, and
+ * pulled up itself by the height of the floating header so the photograph runs
+ * to the very top of the page. Nothing else uses `.hero--home`.
+ */
+.hero--home {
+  min-height: min(68vh, 620px);
+  margin-top: -88px;
+}
+
+/* ---------- home sections -------------------------------------------- */
+
+/* ---------- contents list (the five long-form sections) ---------------- */
+
+/* The heading of a second group inside a section: the five long-form sections,
+   sitting under the category cards on the homepage. One step down from
+   `.section-head`, so the cards stay the main event. */
+.sub-head {
+  max-width: 640px;
+  margin: 72px 0 24px;
+}
+
+.sub-head h3 {
+  font-family: var(--ie-serif);
+  font-size: clamp(1.15rem, 1.9vw, 1.45rem);
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--ie-navy);
+}
+
+.sub-head p {
+  color: var(--ie-muted);
+  margin-top: 8px;
+  font-size: 0.98rem;
+}
+
+.contents-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--ie-line);
+}
+
+.contents-list li {
+  border-bottom: 1px solid var(--ie-line);
+}
+
+.contents-list__row {
+  display: grid;
+  grid-template-columns: 3.5rem minmax(0, 1fr) 1.5rem;
+  align-items: baseline;
+  gap: 18px;
+  padding: 22px 6px;
+  color: var(--ie-navy);
+  transition: background 0.2s ease, padding 0.2s ease;
+}
+
+.contents-list__row:hover {
+  background: var(--ie-paper);
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+.contents-list__num {
+  font-family: var(--ie-serif);
+  font-size: 1.05rem;
+  color: var(--ie-gold);
+  letter-spacing: 0.08em;
+}
+
+.contents-list__body {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  min-width: 0;
+}
+
+.contents-list__body b {
+  font-family: var(--ie-serif);
+  font-size: clamp(1.35rem, 2.4vw, 1.75rem);
+  font-weight: 600;
+  line-height: 1.15;
+}
+
+.contents-list__body span {
+  font-size: 0.95rem;
+  color: var(--ie-muted);
+}
+
+.contents-list__arrow {
+  color: var(--ie-green);
+  font-size: 1.1rem;
+  transition: transform 0.2s ease;
+}
+
+.contents-list__row:hover .contents-list__arrow {
+  transform: translateX(4px);
+}
+
+/*
+ * The homepage's one "Start exploring" block. The cream panel is pulled up over
+ * the bottom of the hero, so the three category cards sit half on the photograph
+ * and half on the page and the two read as one picture; the five long-form
+ * sections follow it on the paper below.
+ */
+.start {
+  padding: 0 0 84px;
+  background: var(--ie-paper);
+}
+
+.panel {
+  position: relative;
+  z-index: 2;
+  margin-top: calc(-1 * clamp(52px, 6.5vw, 104px));
+  padding: clamp(24px, 3vw, 42px);
+  background: var(--ie-cream);
+  border-radius: 18px;
+  box-shadow: 0 34px 70px -38px rgba(6, 31, 66, 0.6);
+}
+
+/* Inside the panel the cards lose their own frames and become three columns of
+   one cream surface rather than three boxes sitting on top of it. */
+.panel .section-head {
+  max-width: 620px;
+  margin: 0 auto 34px;
+  text-align: center;
+}
+
+.panel .journey-grid {
+  gap: clamp(18px, 2.4vw, 30px);
+}
+
+.panel .journey-card {
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.panel .journey-card:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+.panel .journey-card__media {
+  aspect-ratio: 4 / 3;
+  border-radius: 12px;
+}
+
+.panel .journey-card__body {
+  padding: 22px 4px 2px;
+}
+
+/*
+ * The six featured places, directly under the guide's own shape: the panel says
+ * what the guide is, this says where to begin. Three across and two rows, so the
+ * block is a rectangle — six cards would leave a gap in any other count.
+ */
+.start-places {
+  padding: 0 0 96px;
+}
+
+.place-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.place-grid .place-card__body {
+  padding: 20px 22px 24px;
+}
+
+.place-grid .place-card__body h3 {
+  font-size: 1.45rem;
+}
+
+.section-head {
+  max-width: 640px;
+  margin-bottom: 40px;
+}
+
+.section-head h2 {
+  font-size: clamp(1.9rem, 3.6vw, 2.9rem);
+}
+
+.section-head p {
+  color: var(--ie-muted);
+  margin-top: 6px;
+}
+
+.journey-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 26px;
+}
+
+.journey-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--ie-cream);
+  border: 1px solid var(--ie-line);
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: var(--ie-shadow);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.journey-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 26px 50px -26px rgba(6, 31, 66, 0.5);
+}
+
+.journey-card__media {
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background: var(--ie-sage);
+}
+
+.journey-card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.journey-card:hover .journey-card__media img {
+  transform: scale(1.04);
+}
+
+.journey-card__body {
+  padding: 26px 26px 30px;
+  text-align: center;
+}
+
+.journey-card__body h3 {
+  font-size: clamp(1.6rem, 2.4vw, 2.05rem);
+  color: var(--ie-navy);
+}
+
+.journey-card__body .ornament {
+  margin: 12px 0 14px;
+}
+
+.journey-card__body p {
+  color: var(--ie-muted);
+  font-size: 0.98rem;
+  margin: 0;
+}
+
+.then-now {
+  background: var(--ie-cream);
+  padding: 76px 0;
+  border-top: 1px solid var(--ie-line);
+}
+
+.then-now__inner {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: clamp(28px, 5vw, 70px);
+  align-items: center;
+}
+
+.then-now__panel {
+  background: var(--ie-paper);
+  border: 1px solid var(--ie-line);
+  border-radius: 6px;
+  padding: clamp(24px, 3vw, 40px);
+}
+
+.then-now__art {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.then-now__art img {
+  width: 88px;
+  height: 88px;
+  object-fit: contain;
+  image-rendering: -webkit-optimize-contrast;
+}
+
+.then-now__art figcaption {
+  font-size: 0.86rem;
+  color: var(--ie-muted);
+  line-height: 1.5;
+}
+
+.stat-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 26px;
+  margin-top: 26px;
+  padding-top: 22px;
+  border-top: 1px solid var(--ie-line);
+}
+
+.stat {
+  min-width: 96px;
+}
+
+.stat b {
+  display: block;
+  font-family: var(--ie-serif);
+  font-size: 1.9rem;
+  font-weight: 600;
+  color: var(--ie-navy);
+  line-height: 1;
+}
+
+.stat span {
+  font-size: 0.74rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ie-muted);
+}
+
+/* ---------- listing --------------------------------------------------- */
+
+.listing {
+  padding: 64px 0 90px;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 26px;
+}
+
+.place-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--ie-cream);
+  border: 1px solid var(--ie-line);
+  border-radius: 6px;
+  overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.place-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--ie-shadow);
+}
+
+.place-card__media {
+  aspect-ratio: 3 / 2;
+  overflow: hidden;
+  background: var(--ie-sage);
+}
+
+.place-card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.place-card__body {
+  padding: 22px 24px 26px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.place-card__county {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ie-gold);
+}
+
+.place-card__body h3 {
+  font-size: 1.65rem;
+  margin-top: 6px;
+}
+
+.place-card__body p {
+  color: var(--ie-muted);
+  font-size: 0.95rem;
+  margin: 8px 0 0;
+}
+
+/* ---------- article layout ------------------------------------------- */
+
+.article-shell {
+  display: grid;
+  grid-template-columns: 232px minmax(0, 1fr);
+  gap: clamp(30px, 5vw, 72px);
+  padding: 60px 0 90px;
+}
+
+.side-menu {
+  align-self: start;
+  position: sticky;
+  top: 98px;
+}
+
+.side-menu__label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ie-muted);
+  margin-bottom: 14px;
+}
+
+.side-menu__list {
+  border-top: 1px solid var(--ie-line);
+}
+
+.side-menu__link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 0;
+  border-bottom: 1px solid var(--ie-line);
+  color: var(--ie-navy);
+  font-size: 0.93rem;
+}
+
+.side-menu__link::before {
+  content: "";
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--ie-line);
+  flex: 0 0 auto;
+}
+
+.side-menu__link:hover::before,
+.side-menu__link[aria-current="true"]::before {
+  background: var(--ie-green);
+}
+
+.side-menu__link[aria-current="true"] {
+  color: var(--ie-green);
+  font-weight: 700;
+}
+
+.side-menu__thread {
+  margin-top: 26px;
+  padding-top: 22px;
+  border-top: 1px solid var(--ie-line);
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  font-size: 0.88rem;
+  color: var(--ie-muted);
+  line-height: 1.55;
+}
+
+.side-menu__thread svg {
+  width: 26px;
+  height: 26px;
+  color: var(--ie-gold);
+  flex: 0 0 auto;
+}
+
+/*
+ * The marker: one green dot for the whole rail rather than one per row, so it
+ * can slide from section to section. `public/scroll-spy.js` sets --ie-spy-x and
+ * --ie-spy-y on the dot itself and flags <html> once it has, which is what
+ * reveals it — until then it is invisible and the rail's own per-row dots carry
+ * the list. The custom properties keep the --ie- prefix because Tailwind
+ * re-declares bare ones (see the top of this file).
+ */
+.side-menu__rail {
+  position: relative;
+}
+
+.side-menu__marker {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  width: 11px;
+  height: 11px;
+  margin: -5.5px 0 0 -5.5px;
+  border-radius: 50%;
+  background: var(--ie-green);
+  box-shadow: 0 0 0 3px rgba(23, 128, 77, 0.16);
+  transform: translate3d(var(--ie-spy-x, 0), var(--ie-spy-y, 0), 0);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 200ms linear;
+}
+
+html[data-side-menu-spy] .side-menu__marker {
+  opacity: 1;
+  transition:
+    transform 300ms cubic-bezier(0.33, 0, 0.2, 1),
+    opacity 200ms linear;
+}
+
+/*
+ * A rail entry clicked from the top of a long page glides to its heading rather
+ * than jumping (`scroll-behavior: smooth` on <html>, above), and lands with the
+ * heading just clear of the sticky header instead of underneath it. Keep these
+ * two below the marker script's reading line — it has to be able to see the
+ * heading you asked for.
+ */
+.article section[id] {
+  scroll-margin-top: 96px;
+}
+
+.article {
+  max-width: 720px;
+}
+
+.article__header {
+  margin-bottom: 30px;
+}
+
+.article__header h1 {
+  font-size: clamp(2.2rem, 4.4vw, 3.3rem);
+}
+
+.article__lead {
+  font-size: 1.1rem;
+  color: var(--ie-muted);
+}
+
+.article__figure {
+  margin: 0 0 30px;
+}
+
+.article__figure img {
+  width: 100%;
+  border-radius: 4px;
+  background: var(--ie-sage);
+}
+
+.article__figure figcaption {
+  margin-top: 9px;
+  font-size: 0.78rem;
+  color: var(--ie-muted);
+}
+
+.article h2 {
+  font-size: clamp(1.6rem, 2.8vw, 2.2rem);
+  margin: 44px 0 14px;
+}
+
+.article h2:first-of-type {
+  margin-top: 34px;
+}
+
+.article p {
+  color: var(--ie-ink);
+}
+
+.pull-quote {
+  margin: 40px 0;
+  padding: 26px 30px 24px;
+  background: var(--ie-cream);
+  border-left: 2px solid var(--ie-gold);
+  border-radius: 0 6px 6px 0;
+}
+
+.pull-quote p {
+  font-family: var(--ie-serif);
+  font-size: clamp(1.3rem, 2.4vw, 1.7rem);
+  font-style: italic;
+  line-height: 1.45;
+  color: var(--ie-navy);
+  margin: 0 0 12px;
+}
+
+.pull-quote cite {
+  font-style: normal;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ie-gold);
+}
+
+.article__outro {
+  margin-top: 44px;
+  padding-top: 26px;
+  border-top: 1px solid var(--ie-line);
+  color: var(--ie-muted);
+}
+
+/* ---------- place page ------------------------------------------------ */
+
+.place-hero {
+  padding: 58px 0 0;
+  text-align: center;
+}
+
+.place-hero h1 {
+  font-size: clamp(2.4rem, 5.6vw, 4rem);
+}
+
+.place-hero__tagline {
+  color: var(--ie-muted);
+  font-size: 1.05rem;
+  margin: 4px 0 0;
+}
+
+.place-media {
+  margin: 32px 0 0;
+}
+
+.place-media img {
+  width: 100%;
+  max-height: 560px;
+  object-fit: cover;
+  border-radius: 4px;
+  background: var(--ie-sage);
+}
+
+.place-media figcaption {
+  margin-top: 9px;
+  font-size: 0.78rem;
+  color: var(--ie-muted);
+  text-align: left;
+}
+
+.facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+  margin: 26px 0 0;
+  padding: 16px 0;
+  border-top: 1px solid var(--ie-line);
+  border-bottom: 1px solid var(--ie-line);
+}
+
+.fact {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 4px 26px 4px 0;
+  margin-right: 26px;
+  border-right: 1px solid var(--ie-line);
+}
+
+.fact:last-child {
+  border-right: 0;
+  margin-right: 0;
+  padding-right: 0;
+}
+
+.fact svg {
+  width: 20px;
+  height: 20px;
+  color: var(--ie-gold);
+  flex: 0 0 auto;
+}
+
+.fact b {
+  display: block;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ie-muted);
+}
+
+.fact span {
+  display: block;
+  color: var(--ie-navy);
+  font-size: 0.98rem;
+}
+
+.place-body {
+  max-width: 720px;
+  margin: 38px auto 0;
+}
+
+.place-body p {
+  font-size: 1.05rem;
+}
+
+.pager {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 14px;
+  margin-top: 52px;
+  padding-top: 30px;
+  border-top: 1px solid var(--ie-line);
+}
+
+.pager__spacer {
+  flex: 1;
+}
+
+.more-places {
+  margin-top: 44px;
+  padding-top: 28px;
+  border-top: 1px solid var(--ie-line);
+}
+
+.more-places h2 {
+  font-size: 1.14rem;
+  font-family: var(--ie-sans);
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ie-muted);
+  margin-bottom: 14px;
+}
+
+.more-places ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 22px;
+}
+
+.more-places a {
+  color: var(--ie-navy);
+}
+
+.more-places a:hover {
+  color: var(--ie-green);
+}
+
+/* ---------- gallery / credits ---------------------------------------- */
+
+.gallery-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  align-items: flex-end;
+  margin-top: 22px;
+}
+
+.gallery-grid figure {
+  margin: 0;
+  text-align: center;
+}
+
+.gallery-grid img {
+  border: 1px solid var(--ie-line);
+  border-radius: 3px;
+  background: #fff;
+  max-height: 190px;
+  width: auto;
+}
+
+.gallery-grid figcaption {
+  font-size: 0.74rem;
+  color: var(--ie-muted);
+  margin-top: 6px;
+}
+
+.credit-list {
+  display: grid;
+  gap: 0;
+  margin-top: 10px;
+  border-top: 1px solid var(--ie-line);
+}
+
+.credit-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--ie-line);
+  font-size: 0.92rem;
+}
+
+.credit-row b {
+  color: var(--ie-navy);
+  min-width: 190px;
+  font-weight: 700;
+}
+
+.credit-row span {
+  color: var(--ie-muted);
+}
+
+/* ---------- cabin home button ---------------------------------------- */
+
+.cabin-home {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 50;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 7px 16px 7px 8px;
+  border-radius: 999px;
+  background: var(--ie-green);
+  color: #fff;
+  box-shadow: 0 14px 30px -14px rgba(6, 31, 66, 0.75);
+  font-size: 0.84rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.cabin-home:hover {
+  background: var(--ie-green-dark);
+  color: #fff;
+}
+
+.cabin-home img {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #fdf9ef;
+  padding: 2px;
+  object-fit: contain;
+  image-rendering: -webkit-optimize-contrast;
+}
+
+/* ---------- footer ---------------------------------------------------- */
+
+.site-footer {
+  background: var(--ie-sage);
+  padding: 46px 0 34px;
+  margin-top: 20px;
+}
+
+.site-footer__grid {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr 1fr;
+  gap: 30px;
+}
+
+.site-footer h2 {
+  font-family: var(--ie-sans);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ie-muted);
+  margin-bottom: 12px;
+}
+
+.site-footer p,
+.site-footer li {
+  font-size: 0.92rem;
+  color: var(--ie-ink);
+}
+
+.site-footer a {
+  color: var(--ie-navy);
+}
+
+.site-footer li + li {
+  margin-top: 7px;
+}
+
+.site-footer__base {
+  margin-top: 32px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(10, 37, 68, 0.14);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 22px;
+  justify-content: space-between;
+  font-size: 0.84rem;
+  color: var(--ie-muted);
+}
+
+.site-footer__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 10px;
+}
+
+/* The site map, in the footer of every page. Underlined on purpose: it is the
+   one link down here that is not an aside, and a reviewer looking for it should
+   not have to hunt. */
+.site-footer__sitemap {
+  color: var(--ie-navy);
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-color: var(--ie-gold);
+  text-underline-offset: 3px;
+}
+
+.site-footer__sitemap:hover {
+  color: var(--ie-green);
+  text-decoration-color: var(--ie-green);
+}
+
+/* ---------- the site map ---------------------------------------------- */
+
+.index-hero {
+  padding: clamp(50px, 7vw, 80px) 0 clamp(28px, 3.6vw, 42px);
+  background: linear-gradient(180deg, var(--ie-cream) 0%, var(--ie-paper) 82%);
+  border-bottom: 1px solid var(--ie-line);
+}
+
+.index-hero__inner {
+  max-width: 900px;
+}
+
+.index-hero__title {
+  font-family: var(--ie-serif);
+  font-size: clamp(2.3rem, 5.6vw, 4.1rem);
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+  color: var(--ie-navy);
+  margin: 0;
+}
+
+.index-hero__lead {
+  max-width: 66ch;
+  margin: 24px 0 0;
+  font-size: 1.14rem;
+  line-height: 1.7;
+  color: var(--ie-ink);
+}
+
+/* The counts are derived from the content, not written down, so this line is
+   allowed to be dull and factual. */
+.index__counts {
+  margin: 22px 0 0;
+  font-size: 0.86rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ie-muted);
+}
+
+.index__counts b {
+  color: var(--ie-navy);
+  font-size: 1rem;
+}
+
+.index {
+  max-width: 1040px;
+  padding: 0 0 clamp(64px, 7vw, 100px);
+}
+
+.index__group {
+  margin-top: clamp(40px, 5vw, 62px);
+  padding-top: clamp(26px, 3.2vw, 38px);
+  border-top: 1px solid var(--ie-line);
+}
+
+.index__label {
+  font-family: var(--ie-serif);
+  font-size: clamp(1.5rem, 2.8vw, 2.1rem);
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: var(--ie-navy);
+  margin: 0 0 10px;
+}
+
+.index__note {
+  max-width: 72ch;
+  margin: 0 0 6px;
+  color: var(--ie-muted);
+  line-height: 1.65;
+}
+
+.index__note--foot {
+  margin-top: 18px;
+  padding-left: 16px;
+  border-left: 2px solid var(--ie-gold);
+  font-size: 0.96rem;
+}
+
+.index__list {
+  list-style: none;
+  margin: 20px 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 4px 34px;
+}
+
+.index__list li {
+  padding: 7px 0;
+  border-bottom: 1px solid var(--ie-line);
+}
+
+.index__list a {
+  color: var(--ie-navy);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.index__list a:hover {
+  color: var(--ie-green);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* Two links do not need two columns. */
+.index__list--start {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  max-width: 780px;
+}
+
+/* The five sections carry their own one-line description. */
+.index__list--blurbs {
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0;
+}
+
+.index__list--blurbs li {
+  display: grid;
+  grid-template-columns: minmax(0, 15rem) minmax(0, 1fr);
+  gap: 6px 26px;
+  align-items: baseline;
+}
+
+.index__blurb {
+  color: var(--ie-muted);
+  font-size: 0.98rem;
+  line-height: 1.6;
+}
+
+.index__cols {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 30px;
+  margin-top: 24px;
+}
+
+.index__col-title {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin: 0;
+  font-family: var(--ie-serif);
+  font-size: 1.32rem;
+  font-weight: 600;
+  color: var(--ie-navy);
+}
+
+.index__col-title a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.index__col-title a:hover {
+  color: var(--ie-green);
+}
+
+.index__col-count {
+  font-family: var(--ie-sans);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--ie-green);
+  border: 1px solid var(--ie-line);
+  border-radius: 999px;
+  padding: 1px 8px;
+}
+
+.index__list--tight {
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0;
+  margin-top: 12px;
+}
+
+.index__list--tight li {
+  padding: 6px 0;
+}
+
+.index__foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px 22px;
+  margin: 22px 0 0;
+}
+
+.index__footnote {
+  color: var(--ie-muted);
+  font-size: 0.94rem;
+}
+
+@media (max-width: 900px) {
+  .index__cols {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 700px) {
+  .index-hero__lead {
+    font-size: 1.04rem;
+    margin-top: 18px;
+  }
+
+  .index__list,
+  .index__list--start,
+  .index__cols {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  /* The description drops under its link rather than beside it. */
+  .index__list--blurbs li {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2px;
+    padding: 12px 0;
+  }
+
+  .index__note--foot {
+    padding-left: 12px;
+  }
+}
+
+/* ---------- motion ---------------------------------------------------- */
+
+.reveal {
+  animation: reveal-up 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.reveal--2 {
+  animation-delay: 0.08s;
+}
+
+.reveal--3 {
+  animation-delay: 0.16s;
+}
+
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ---------- then & now comparison ------------------------------------ */
+
+.then-pair {
+  margin: 46px 0 0;
+  padding: 30px 0 0;
+  border-top: 1px solid var(--ie-line);
+}
+
+.then-pair__head h2 {
+  font-size: clamp(1.45rem, 2.6vw, 2.05rem);
+  margin: 0;
+}
+
+.then-pair__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(18px, 3vw, 34px);
+  margin-top: 26px;
+}
+
+.then-pair__item {
+  margin: 0;
+}
+
+/* The 2005 scans run from 200px to 1024px wide, so they are letterboxed
+   inside a fixed frame rather than stretched to fill it. */
+.then-pair__item img {
+  display: block;
+  width: 100%;
+  height: 250px;
+  object-fit: contain;
+  padding: 10px;
+  background: var(--ie-paper);
+  border: 1px solid var(--ie-line);
+  border-radius: 4px;
+  image-rendering: -webkit-optimize-contrast;
+}
+
+.then-pair__item figcaption {
+  margin-top: 11px;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: var(--ie-muted);
+}
+
+.then-pair__item figcaption b {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ie-gold);
+}
+
+.then-pair__note {
+  margin: 18px 0 0;
+  font-size: 0.8rem;
+  color: var(--ie-muted);
+}
+
+.then-strip {
+  background: var(--ie-paper);
+  border-top: 1px solid var(--ie-line);
+  padding: 60px 0 84px;
+}
+
+.then-strip__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(205px, 1fr));
+  gap: 22px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.then-strip__card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid var(--ie-line);
+  border-radius: 5px;
+  text-decoration: none;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.then-strip__card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--ie-shadow);
+}
+
+.then-strip__pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--ie-line);
+}
+
+.then-strip__pair img {
+  display: block;
+  width: 100%;
+  height: 112px;
+  padding: 5px;
+  object-fit: contain;
+  background: var(--ie-paper);
+  image-rendering: -webkit-optimize-contrast;
+}
+
+.then-strip__label {
+  display: block;
+  padding: 13px 15px 15px;
+  border-top: 1px solid var(--ie-line);
+}
+
+.then-strip__label b {
+  display: block;
+  font-family: var(--ie-serif);
+  font-size: 1.08rem;
+  line-height: 1.25;
+  color: var(--ie-navy);
+}
+
+.then-strip__label span {
+  display: block;
+  margin-top: 3px;
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ie-muted);
+}
+
+.then-strip__more {
+  margin: 34px 0 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .reveal,
+  .reveal--2,
+  .reveal--3 {
+    animation: none;
+  }
+
+  * {
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ---------- responsive ------------------------------------------------ */
+
+@media (max-width: 1020px) {
+  .article-shell {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .side-menu {
+    position: static;
+    border: 1px solid var(--ie-line);
+    border-radius: 6px;
+    padding: 18px 20px;
+    background: var(--ie-cream);
+  }
+
+  .side-menu__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 20px;
+    border-top: 0;
+  }
+
+  .side-menu__link {
+    border-bottom: 0;
+    padding: 6px 0;
+    font-size: 0.88rem;
+  }
+
+  .side-menu__thread {
+    display: none;
+  }
+}
+
+@media (max-width: 900px) {
+  .card-grid,
+  .journey-grid,
+  .place-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .then-now__inner {
+    grid-template-columns: 1fr;
+  }
+
+  .site-footer__grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/*
+ * The header takes its own row earlier than the rest of the mobile layout.
+ * Four menu items plus the wordmark and the language switch stop fitting on one
+ * line below ~700px, in both languages. This breakpoint was pushed out to 960px
+ * while Geography and Ireland today were in the menu — "Ирландия сегодня" is the
+ * longest label on the site — and came back in when they left it. An end-to-end
+ * test sweeps fifteen widths from 360 to 1440 asserting the header never
+ * overflows its container.
+ */
+@media (max-width: 760px) {
+  /* Two rows of menu, so the header is taller than the 88px the hero is pulled
+     up by and the two would overlap. On a phone the pill simply sits above the
+     hero on the paper instead. */
+  .hero--home {
+    margin-top: 0;
+  }
+
+  .site-header__inner {
+    flex-wrap: wrap;
+    gap: 10px 16px;
+    padding: 12px 0;
+  }
+
+  .wordmark__text {
+    font-size: 1.35rem;
+  }
+
+  .site-nav {
+    order: 3;
+    width: 100%;
+    margin-left: 0;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    border-top: 1px solid var(--ie-line);
+    padding-top: 10px;
+    font-size: 0.88rem;
+    gap: 4px 18px;
+  }
+
+  .lang-switch {
+    margin-left: auto;
+  }
+
+  /* The header is two rows here — 109px against 75px — so a heading clicked
+     from the rail needs more room above it to clear the bar. */
+  .article section[id] {
+    scroll-margin-top: 148px;
+  }
+}
+
+/* ---------- the 2005 archive, indexed --------------------------------- */
+/* The archive's table of contents. It is a long page by nature — 168 rows —
+   so the rules here are about rhythm and scannability rather than drama: one
+   hairline per row, the file path in monospace, the label in the serif. */
+
+.archive {
+  padding: 72px 0 96px;
+}
+
+/* At the top of a page the home stat row's leading rule reads as a mistake. */
+.stat-row--archive {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: 0;
+  border-bottom: 1px solid var(--ie-line);
+  padding-bottom: 26px;
+}
+
+.archive__note {
+  max-width: 68ch;
+  margin-top: 34px;
+  color: var(--ie-muted);
+}
+
+.archive-half {
+  margin-top: 76px;
+}
+
+.archive-half .section-head {
+  border-top: 1px solid var(--ie-line);
+  padding-top: 32px;
+  margin-bottom: 22px;
+}
+
+.archive-sections {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.archive-section {
+  border-bottom: 1px solid var(--ie-line);
+}
+
+.archive-section__head {
+  display: grid;
+  grid-template-columns: 3.2rem minmax(0, 1fr) 1.5rem;
+  align-items: baseline;
+  gap: 16px;
+  padding: 18px 6px;
+  color: var(--ie-navy);
+  transition: background 0.2s ease, padding 0.2s ease;
+}
+
+.archive-section__head:hover {
+  background: var(--ie-paper);
+  padding-left: 14px;
+  padding-right: 14px;
+}
+
+.archive-section__num {
+  font-family: var(--ie-serif);
+  font-size: 0.95rem;
+  color: var(--ie-gold);
+  letter-spacing: 0.08em;
+}
+
+.archive-section__body {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.archive-section__body b {
+  font-family: var(--ie-serif);
+  font-size: clamp(1.2rem, 2vw, 1.5rem);
+  font-weight: 600;
+  line-height: 1.15;
+}
+
+.archive-section__arrow {
+  color: var(--ie-green);
+  font-size: 1rem;
+  transition: transform 0.2s ease;
+}
+
+.archive-section__head:hover .archive-section__arrow {
+  transform: translateX(4px);
+}
+
+.archive-pages {
+  list-style: none;
+  margin: 0 0 20px;
+  padding: 0 0 0 3.2rem;
+}
+
+.archive-pages--wide {
+  margin-top: 18px;
+  padding-left: 0;
+}
+
+.archive-page {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: 16px;
+  padding: 8px 6px;
+  border-top: 1px dashed var(--ie-line);
+  color: var(--ie-navy);
+}
+
+.archive-page:hover {
+  background: var(--ie-paper);
+}
+
+.archive-page__title {
+  min-width: 0;
+  overflow-wrap: break-word;
+}
+
+/* The path is evidence, not decoration: it is the file you are about to open. */
+.archive-page__file {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.74rem;
+  color: var(--ie-muted);
+  overflow-wrap: anywhere;
+}
+
+/* Twelve pages in the archive had no title of their own. Marked, not hidden. */
+.archive-page__file--fallback {
+  color: var(--ie-green);
+}
+
+/* The three files the archive opens from, above the two section lists. */
+.archive-start {
+  margin-top: 52px;
+  padding: 28px 30px 24px;
+  background: var(--ie-paper);
+  border-left: 3px solid var(--ie-green);
+}
+
+.archive-start h2 {
+  font-family: var(--ie-serif);
+  font-size: 1.6rem;
+  margin-bottom: 6px;
+}
+
+.archive-start p {
+  max-width: 66ch;
+  color: var(--ie-muted);
+}
+
+.archive-start .archive-pages--wide {
+  margin-top: 16px;
+}
+
+.archive-orphans {
+  margin-top: 48px;
+  padding: 28px 30px 30px;
+  background: var(--ie-paper);
+  border-left: 3px solid var(--ie-gold);
+}
+
+.archive-orphans h3 {
+  font-family: var(--ie-serif);
+  font-size: 1.5rem;
+  margin-bottom: 6px;
+}
+
+.archive-orphans p {
+  max-width: 62ch;
+  color: var(--ie-muted);
+}
+
+.archive__foot {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  gap: 32px;
+  margin-top: 88px;
+  padding-top: 34px;
+  border-top: 1px solid var(--ie-line);
+}
+
+.archive__dead h2 {
+  font-size: 1.4rem;
+}
+
+.archive__dead p {
+  max-width: 56ch;
+  margin-top: 4px;
+  color: var(--ie-muted);
+}
+
+.archive__dead ul {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  list-style: none;
+  margin: 12px 0 0;
+  padding: 0;
+}
+
+.archive__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.archive__footnote {
+  margin-top: 28px;
+  font-size: 0.86rem;
+  color: var(--ie-muted);
+}
+
+@media (max-width: 700px) {
+  body {
+    font-size: 16px;
+  }
+
+  /* Narrow, tall crop of a wide landscape: bias the framing down to the land. */
+  .hero {
+    background-position: center 62%;
+  }
+
+  .hero--page {
+    background-position: center 55%;
+  }
+
+  .contents-list__row {
+    grid-template-columns: minmax(0, 1fr) 1.25rem;
+    gap: 12px;
+    padding: 18px 2px;
+  }
+
+  .contents-list__num {
+    display: none;
+  }
+
+  .contents-list__row:hover {
+    padding-left: 6px;
+    padding-right: 6px;
+  }
+
+  .card-grid,
+  .journey-grid,
+  .place-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .start-places {
+    padding: 0 0 64px;
+  }
+
+  .start {
+    padding: 0 0 60px;
+  }
+
+  .panel {
+    padding: 20px 18px 26px;
+    border-radius: 14px;
+  }
+
+  .panel .section-head {
+    margin-bottom: 24px;
+  }
+
+  .site-footer__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cabin-home span {
+    display: none;
+  }
+
+  .cabin-home {
+    padding: 7px;
+  }
+
+  .fact {
+    border-right: 0;
+    margin-right: 0;
+    padding-right: 0;
+    width: 100%;
+  }
+
+  .then-pair__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .then-pair__item img {
+    height: 220px;
+  }
+
+  .then-strip {
+    padding: 48px 0 64px;
+  }
+
+  .then-strip__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+  }
+
+  .then-strip__pair img {
+    height: 88px;
+  }
+
+  .then-strip__label {
+    padding: 10px 11px 12px;
+  }
+
+  .then-strip__label b {
+    font-size: 0.96rem;
+  }
+}
+
+@media (max-width: 700px) {
+  .archive {
+    padding: 48px 0 64px;
+  }
+
+  .archive-half {
+    margin-top: 54px;
+  }
+
+  .archive-pages {
+    padding-left: 0;
+  }
+
+  /* Stack the path under the title rather than crushing both. */
+  .archive-page {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 3px;
+  }
+
+  .archive__foot {
+    grid-template-columns: minmax(0, 1fr);
+    align-items: start;
+  }
+}
+
+/* ---------- the case study ------------------------------------------- */
+
+/*
+ * A page about the build, not a page of the guide. It takes a paper hero
+ * instead of a photograph — nothing on it is a destination — and the whole page
+ * is set as one narrow column, because it is meant to be read rather than
+ * browsed. Each chapter's long version is a native <details>, so it works with
+ * no JavaScript and is reachable by keyboard for free.
+ */
+.case-hero {
+  padding: clamp(54px, 7.5vw, 86px) 0 clamp(30px, 4vw, 46px);
+  background: linear-gradient(180deg, var(--ie-cream) 0%, var(--ie-paper) 82%);
+  border-bottom: 1px solid var(--ie-line);
+}
+
+.case-hero__inner {
+  max-width: 880px;
+}
+
+.case-hero__title {
+  font-family: var(--ie-serif);
+  font-size: clamp(2.4rem, 6vw, 4.4rem);
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+  color: var(--ie-navy);
+  margin: 0;
+}
+
+.case-hero__lead {
+  max-width: 68ch;
+  margin: 26px 0 0;
+  font-size: 1.18rem;
+  line-height: 1.7;
+  color: var(--ie-ink);
+}
+
+.case {
+  max-width: 780px;
+  padding: 0 0 clamp(70px, 8vw, 110px);
+}
+
+.case__intro {
+  padding-top: clamp(44px, 5.5vw, 66px);
+}
+
+.case h2 {
+  font-family: var(--ie-serif);
+  font-size: clamp(1.55rem, 3vw, 2.25rem);
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: var(--ie-navy);
+  margin: 0 0 14px;
+}
+
+.case p {
+  margin: 0 0 18px;
+}
+
+.case__lead {
+  color: var(--ie-muted);
+}
+
+.case__chapter {
+  margin-top: clamp(46px, 6vw, 74px);
+  padding-top: clamp(32px, 4vw, 46px);
+  border-top: 1px solid var(--ie-line);
+}
+
+.case__figure {
+  margin: 30px 0 0;
+  padding: 14px;
+  background: var(--ie-cream);
+  border: 1px solid var(--ie-line);
+  border-radius: 10px;
+}
+
+.case__figure img {
+  width: 100%;
+  border-radius: 5px;
+}
+
+.case__figure figcaption {
+  margin: 12px 0 2px;
+  font-size: 0.86rem;
+  line-height: 1.5;
+  color: var(--ie-muted);
+  text-align: center;
+}
+
+/* The folded-away long version of a chapter. */
+.case__note {
+  margin-top: 26px;
+  background: var(--ie-cream);
+  border: 1px solid var(--ie-line);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.case__note__summary {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 26px;
+  grid-template-rows: auto auto;
+  align-items: center;
+  gap: 4px 18px;
+  padding: 18px 22px;
+  cursor: pointer;
+  list-style: none;
+}
+
+.case__note__summary::-webkit-details-marker {
+  display: none;
+}
+
+.case__note__summary:focus-visible {
+  outline: 2px solid var(--ie-gold);
+  outline-offset: -3px;
+}
+
+.case__note__kicker {
+  grid-column: 1;
+  grid-row: 1;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ie-gold);
+}
+
+.case__note__title {
+  grid-column: 1;
+  grid-row: 2;
+  font-family: var(--ie-serif);
+  font-size: 1.3rem;
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--ie-navy);
+}
+
+.case__note__mark {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  justify-self: end;
+  position: relative;
+  width: 22px;
+  height: 22px;
+  border: 1px solid var(--ie-gold);
+  border-radius: 999px;
+}
+
+/* A plus that becomes a minus: the vertical stroke rotates away when open. */
+.case__note__mark::before,
+.case__note__mark::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 5px;
+  right: 5px;
+  height: 1.5px;
+  background: var(--ie-gold);
+  transform: translateY(-50%);
+}
+
+.case__note__mark::after {
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+.case__note[open] .case__note__mark::after {
+  transform: translateY(-50%) rotate(90deg);
+  opacity: 0;
+}
+
+.case__note__body {
+  padding: 18px 22px 4px;
+  border-top: 1px solid var(--ie-line);
+}
+
+.case__note__body p {
+  color: var(--ie-ink);
+}
+
+.case__note__body p:last-child {
+  margin-bottom: 18px;
+}
+
+.case__stack {
+  margin: 26px 0 0;
+}
+
+.case__stack-row {
+  display: grid;
+  grid-template-columns: minmax(0, 210px) minmax(0, 1fr);
+  gap: 4px 28px;
+  padding: 15px 0;
+  border-top: 1px solid var(--ie-line);
+}
+
+.case__stack-row dt {
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: var(--ie-navy);
+}
+
+.case__stack-row dd {
+  margin: 0;
+  font-size: 0.98rem;
+  color: var(--ie-muted);
+}
+
+.case__outro {
+  margin-top: clamp(48px, 6vw, 76px);
+  padding: clamp(26px, 3.4vw, 40px);
+  background: var(--ie-cream);
+  border: 1px solid var(--ie-line);
+  border-radius: 14px;
+}
+
+.case__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+@media (max-width: 700px) {
+  .case-hero {
+    padding: 40px 0 28px;
+  }
+
+  .case-hero__lead {
+    font-size: 1.06rem;
+    margin-top: 20px;
+  }
+
+  .case__figure {
+    padding: 10px;
+  }
+
+  .case__note__summary {
+    padding: 16px 18px;
+  }
+
+  .case__note__body {
+    padding: 16px 18px 2px;
+  }
+
+  /* The term sits above its explanation rather than beside it. */
+  .case__stack-row {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2px;
+  }
+
+  .case__outro {
+    padding: 24px 20px;
+  }
+}

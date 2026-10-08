@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://anna032888.github.io/ireland-then-and-now/sitemap.xml
