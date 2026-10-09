@@ -1694,7 +1694,7 @@ html[data-side-menu-spy] .side-menu__marker {
 
 /* ---------- responsive ------------------------------------------------ */
 
-@media (max-width: 1020px) {
+@media (max-width: 900px) {
   .article-shell {
     grid-template-columns: 1fr;
     gap: 30px;
